@@ -34,3 +34,19 @@ df.drop(['LINENAME','DIVISION', 'DATE', 'TIME', 'DESC', 'ENTRIES', 'EXITS'], axi
 
 df.loc[df.STATION=='CHAMBERS ST'].plot(kind='bar',x='DATETIME', y='TIMEDIFF_ENTRIES', subplots=True, figsize = (16,10))
 # replace 'CHAMBERS ST' with any station name to produce bar plot
+
+
+
+key_stations = df[df.STATION.isin(['28 ST', '23 ST', '33 ST', '34 ST-HERALD SQ', 
+                                   'CHAMBERS ST', 'PARK PLACE', 'WORLD TRADE CTR'])]
+# key_stations is new DataFrame limited only to listed stations
+
+
+key_stations.loc[key_stations.STATION=='23 ST'][0:50].plot(kind='bar',x='DATETIME', y='TIMEDIFF_EXITS', figsize = (16,10))
+# create bar graph for stations
+
+
+
+key_stations[key_stations.STATION=='PARK PLACE'].sort_values('TIMEDIFF_ENTRIES', ascending=False)
+key_stations[key_stations.STATION=='PARK PLACE'].sort_values('TIMEDIFF_EXITS', ascending=False)
+# sort stations by DATETIME with highest TIMEDIFF_ENTRIES/TIMEDIFF_EXITS values
